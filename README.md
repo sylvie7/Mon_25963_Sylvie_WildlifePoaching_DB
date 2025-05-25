@@ -194,4 +194,116 @@ Focus: Implement advanced PL/SQL features to automate workflows, enforce rules, 
 
 
 
-  
+### Explanations for PL/SQL Components (Wildlife Poaching Prediction System)
+
+Triggers: Enforce Business Rules, e.g., Validate Incident Date
+
+    Purpose: Triggers are PL/SQL blocks that automatically execute on specific database events (INSERT, UPDATE, DELETE) to enforce business rules and ensure data integrity.
+    Functionality in Poaching System: The check_incident_date trigger validates that the incident_date in the Poaching_Incident table is not in the future during an INSERT operation.
+
+  ```sql
+CREATE OR REPLACE TRIGGER check_incident_date
+BEFORE INSERT ON Poaching_Incident
+FOR EACH ROW
+BEGIN
+    IF :NEW.incident_date > SYSDATE THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Incident date cannot be in the future!');
+    END IF;
+END;
+/
+```
+
+### Cursors: Process Data Row-by-Row for Reporting
+Purpose: Cursors enable row-by-row processing of query results, ideal for generating detailed reports or iterative tasks.
+Functionality in Poaching System: The incident_cursor retrieves and displays poaching incidents involving endangered species, joining Poaching_Incident and Species tables.
+
+```sql
+DECLARE
+    CURSOR incident_cursor IS
+        SELECT p.incident_id, p.location 
+        FROM Poaching_Incident p
+        JOIN Species s ON p.species_id = s.species_id
+        WHERE s.conservation_status = 'Endangered';
+    incident_record incident_cursor%ROWTYPE;
+BEGIN
+    OPEN incident_cursor;
+    LOOP
+        FETCH incident_cursor INTO incident_record;
+        EXIT WHEN incident_cursor%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Incident ID: ' || incident_record.incident_id || ' at ' || incident_record.location);
+    END LOOP;
+    CLOSE incident_cursor;
+END;
+/
+```
+### Functions: Calculate Poaching Risk Levels
+
+Purpose: Functions are reusable PL/SQL blocks that perform calculations or operations and return a single value.
+Functionality in Poaching System: The calculate_risk_level function assesses the poaching risk for a species based on the number of incidents in the past 12 months.
+
+```sql
+CREATE OR REPLACE FUNCTION calculate_risk_level (species_id_in INT)
+RETURN VARCHAR2 IS
+    risk_level VARCHAR2(20);
+    incident_count INT;
+BEGIN
+    SELECT COUNT(*) INTO incident_count
+    FROM Poaching_Incident
+    WHERE species_id = species_id_in
+    AND incident_date >= ADD_MONTHS(SYSDATE, -12);
+    IF incident_count > 5 THEN
+        risk_level := 'High';
+    ELSIF incident_count > 2 THEN
+        risk_level := 'Medium';
+    ELSE
+        risk_level := 'Low';
+    END IF;
+    RETURN risk_level;
+END;
+/
+```
+### Packages: Organize Related Operations for Modularity
+
+Purpose: Packages group related procedures, functions, and variables into a modular unit, enhancing maintainability and reusability.
+Functionality in Poaching System: The poaching_utils package declares operations for incident management, such as logging activities and calculating risk scores
+
+```sql
+CREATE OR REPLACE PACKAGE poaching_utils IS
+    PROCEDURE log_incident_activity(incident_id_in INT);
+    FUNCTION calculate_risk_score(species_id_in INT) RETURN NUMBER;
+END poaching_utils;
+/
+```
+
+### Auditing: Track Changes to Sensitive Data
+Purpose: Auditing logs changes to critical data, ensuring accountability and supporting security compliance.
+Functionality in Poaching System: The audit_incident_changes trigger logs updates or deletes on the Poaching_Incident table to the AuditLog table, recording the action, incident ID, and timestamp
+
+```sql
+CREATE TABLE AuditLog (
+    log_id INT PRIMARY KEY,
+    action VARCHAR2(50),
+    incident_id INT,
+    change_date DATE
+);
+
+CREATE SEQUENCE audit_log_seq START WITH 1 INCREMENT BY 1;
+
+CREATE OR REPLACE TRIGGER audit_incident_changes
+AFTER UPDATE OR DELETE ON Poaching_Incident
+FOR EACH ROW
+BEGIN
+    INSERT INTO AuditLog (log_id, action, incident_id, change_date)
+    VALUES (audit_log_seq.NEXTVAL, 
+            CASE WHEN DELETING THEN 'DELETE' ELSE 'UPDATE' END, 
+            :OLD.incident_id, SYSDATE);
+END;
+/
+
+SELECT log_id, action, incident_id, change_date FROM AuditLog;
+```
+
+
+
+
+
