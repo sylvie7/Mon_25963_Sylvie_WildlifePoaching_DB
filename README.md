@@ -103,9 +103,9 @@ nship Diagram (ERD)**:
 
 ### Phase 4: Database Setup
 - **Focus**: Created a pluggable database (PDB).
-- **Deliverables**:
-  - [create_pdb.sql](create_pdb.sql)
-  - [plugable.jpg](plugable.jpg)
+- **Deliver![2](https://github.com/user-attachments/assets/c08f5200-9348-4ae0-9c99-56e8d260d6d5)
+ables**:
+  -
  
 - **Screenshots**:
   - **Pluggable Database Status**:
@@ -127,4 +127,71 @@ jpg)
   ALTER PLUGGABLE DATABASE Mon_25963_Sylvie_WildlifePoaching_DB OPEN;
 
   ALTER SESSION SET CONTAINER = Mon_25963_Sylvie_WildlifePoaching_DB;
-  GRANT DBA TO sylvie;
+  GRANT DBA ![1]
+TO sylvie;
+![1](https://github.com/user-attachments/assets/0a35f6d5-9573-42c4-8c05-492c3e9264e6)
+
+### Phase 5: SQL QUERIES.
+- **Creating tables**:
+![3](https://github.com/user-attachments/assets/f91d910a-fbc7-4cec-9b71-d58b6d8ac241)
+![4](https://github.com/user-attachments/assets/3d8214f0-36f7-44a7-bc44-e27e8fd38acc)
+![5](https://github.com/user-attachments/assets/83e17ed6-eb77-459e-b0d4-336e67ac4453)
+![6](https://github.com/user-attachments/assets/69d07c70-9d55-4a5b-8581-01ef44d957c7)
+
+
+- **INSERTING DATA INTO TABLES**:
+- ![7](https://github.com/user-attachments/assets/c7a06ef9-252a-4694-a30d-be3552e1f8f6)
+
+- **DML (DELETE DATA FROM)**:
+- ![dml_delete](https://github.com/user-attachments/assets/40fc1596-56bd-47f5-b248-2b3d2e13bd1c)
+
+- - **UPDATE DATA**:
+  - ![dml_update](https://github.com/user-attachments/assets/eff42039-5e0d-4bae-96e9-b691a2b8ac14)
+ 
+  - 
+
+### Phase 7: Advanced Programming
+Focus: Implement advanced PL/SQL features to automate workflows, enforce rules, and ensure data security.
+### Deliverables:
+
+    triggers.sql: Enrollment status validation trigger.
+    cursors.sql: Student enrollment report cursor.
+    functions.sql: Average grade calculation function.
+    packages.sql: Academic utilities package.
+    audit.sql: Audit log trigger and query.
+
+ ### Features:
+
+    **Triggers**: Enforce business rules, e.g., validate enrollment status.
+    **Cursors**: Process data row-by-row for reporting.
+    **Functions**: Encapsulate logic for calculations like average grades.
+    **Packages**: Organize related operations for modularity.
+    **Auditing**: Track changes to sensitive data.
+
+  
+
+**TRIGGERS**
+![holiday](https://github.com/user-attachments/assets/36501c6f-5345-40ae-857f-a43ad41f5620)
+
+![triger](https://github.com/user-attachments/assets/b1135fe7-1586-464e-8608-82fef05b6a18)
+
+
+**FUNCTIONS**
+![function](https://github.com/user-attachments/assets/550d976b-3c94-4848-8642-58d481642913)
+
+**PROCEDURE**
+![procedure](https://github.com/user-attachments/assets/924953f5-75c6-428f-bc8f-3f1e5f62f460)
+
+**PACKAGES**
+![package](https://github.com/user-attachments/assets/62ba4799-330a-45a2-8f59-0e947cfb6288)
+
+**AUDIT**
+![audit](https://github.com/user-attachments/assets/1ba07e53-93f1-41e9-b698-33caa9176222)
+![audit_triger](https://github.com/user-attachments/assets/bf0819a2-ce1e-4172-afe5-88338e232398)
+
+**TESTING**
+![testing](https://github.com/user-attachments/assets/0cb2a9dd-62cd-418a-b8b0-cfc36f7f631b)
+
+
+
+  
