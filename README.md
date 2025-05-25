@@ -99,7 +99,7 @@ pmn.png)
   - **Entity-Relatio![FLOW_DIAGRAM](https://github.com/user-attachments/assets/02055682-43f7-466c-b517-14cbeb293dd4)
 nship Diagram (ERD)**:
     ![ERD](FLOW_DIAGRAM.PNG)
-    [Insert Diagram Here: Upload FLOW_DIAGRAM.PNG to the repository root]
+   
 
 ### Phase 4: Database Setup
 - **Focus**: Created a pluggable database (PDB).
@@ -109,11 +109,12 @@ nship Diagram (ERD)**:
  
 - **Screenshots**:
   - **Pluggable Database Status**:
-    ![PDB Status](plugable.jpg)
-    [Insert Screenshot Here: Upload plugable.jpg to the repository root]
+    ![PDB Status](pluga![1](https://github.com/user-attachments/assets/d5ceb9c3-1a49-454d-8073-835ebc7ab89f)
+ble.jpg)
   - **Oracle Enterprise Manager**:
-    ![OEM Dashboard](OEM.jpg)
-    [Insert Screenshot Here: Upload OEM.jpg to the repository root]
+    ![OEM Dashboard](OEM.![1](https://github.com/user-attachments/assets/1a2e4f4c-8707-406b-b9ef-44fe86420586)
+jpg)
+    
 - **Code** ([create_pdb.sql](create_pdb.sql)):
   ```sql
   CONN SYSTEM/your_system_password@localhost:1521/orcl AS SYSDBA;
